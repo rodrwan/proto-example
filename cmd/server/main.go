@@ -13,7 +13,9 @@ import (
 func main() {
 	port := 8080
 	srv := grpc.NewServer()
-	sg := &service.Greetings{}
+	sg := &service.Greetings{
+		Prefix: "Hello",
+	}
 	pb.RegisterGreetingServer(srv, sg)
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))

@@ -25,7 +25,6 @@ func main() {
 	resp, err := usc.Hello(context.Background(), &pb.Request{
 		Message: "grpc",
 	})
-
 	if err != nil {
 		panic(err)
 	}
