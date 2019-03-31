@@ -1,6 +1,5 @@
 VERSION=v0.0.1
 SVC=greetings
-BIN=$(PWD)/bin/$(SVC)
 PROTO_FOLDER=proto
 PROTO_SVC=greetings
 
@@ -14,14 +13,10 @@ proto p:
 	protoc -I $(PROTO_FOLDER) $(PROTO_FOLDER)/*.proto \
 		--go_out=plugins=grpc:$(PROTO_FOLDER)
 
-run r:
-	@echo "[running] Running service..."
+client c:
+	@echo "[running] Running client..."
+	@go run cmd/client/main.go
+
+server s:
+	@echo "[running] Running server..."
 	@go run cmd/server/main.go
-
-build b:
-	@echo "[build] Building service..."
-	@cd cmd/server && $(GO) build -o $(BIN) -ldflags=$(LDFLAGS) -tags $(TAGS)
-
-linux l:
-	@echo "[build] Building for linux..."
-	@cd cmd/server && GOOS=linux $(GO) build -a -o $(BIN) --ldflags $(LDFLAGS) -tags $(TAGS)
